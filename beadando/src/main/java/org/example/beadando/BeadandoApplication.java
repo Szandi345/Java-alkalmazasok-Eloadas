@@ -2,6 +2,8 @@ package org.example.beadando;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import soapclient.MNBArfolyamServiceSoap;
+
 
 @SpringBootApplication
 public class BeadandoApplication {
