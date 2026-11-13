@@ -116,5 +116,77 @@ public class ForexController {
         }
         return "forex-price";
     }
+    @GetMapping("/forex/history")
+    public String historicalPrices(
+            @RequestParam(
+                    defaultValue = "EUR_USD") String instrument,
+            @RequestParam(
+                    defaultValue = "D") String granularity,
+            Model model) {
+        model.addAttribute("selectedInstrument", instrument);
+        model.addAttribute("selectedGranularity", granularity);
+        try {
+            String response = oandaService.getHistoricalPrices(
+                    instrument, granularity);
+            JsonNode root = objectMapper.readTree(response);
+            JsonNode candles = root.path("candles");
+            java.util.List<java.util.Map<String, String>> rows =
+                    new java.util.ArrayList<>();
+            if (!candles.isArray()) {
+                throw new IllegalStateException(
+                        "Nem érkezett gyertyaadat.");
+            }
 
+            // Csak a lezárt gyertyákat dolgozzuk fel
+            for (JsonNode candle : candles) {
+                if (!candle.path("complete").asBoolean()) {
+                    continue;
+                }
+                JsonNode mid = candle.path("mid");
+                java.util.Map<String, String> row =
+                        new java.util.LinkedHashMap<>();
+                row.put("time",
+                        candle.path("time").asText());
+                row.put("open",
+                        mid.path("o").asText());
+                row.put("high",
+                        mid.path("h").asText());
+                row.put("low",
+                        mid.path("l").asText());
+                row.put("close",
+                        mid.path("c").asText());
+                rows.add(row);
+            }
+
+            // Csak az utolsó 10 lezárt gyertyát tartjuk meg
+            if (rows.size() > 10) {
+                rows = new java.util.ArrayList<>(
+                        rows.subList(rows.size() - 10, rows.size()));
+            }
+            if (rows.isEmpty()) {
+                throw new IllegalStateException(
+                        "Nem érhető el lezárt historikus árfolyam.");
+            }
+            model.addAttribute("history", rows);
+
+            // A Chart.js számára külön listák
+            java.util.List<String> labels =
+                    new java.util.ArrayList<>();
+            java.util.List<Double> closingPrices =
+                    new java.util.ArrayList<>();
+            for (java.util.Map<String, String> row : rows) {
+                labels.add(row.get("time"));
+                closingPrices.add(
+                        Double.parseDouble(row.get("close")));
+            }
+            model.addAttribute("chartLabels", labels);
+            model.addAttribute("chartPrices", closingPrices);
+
+        } catch (Exception e) {
+            model.addAttribute("error",
+                    "Nem sikerült lekérni a historikus árfolyamokat: "
+                            + e.getMessage());
+        }
+        return "forex-history";
+    }
 }

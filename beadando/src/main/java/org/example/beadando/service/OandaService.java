@@ -51,5 +51,35 @@ public class OandaService {
                 .retrieve()
                 .body(String.class);
     }
+    public String getHistoricalPrices(
+            String instrument,
+            String granularity) {
 
+        // Instrumentum ellenőrzése
+        if (!java.util.Set.of(
+                "EUR_USD", "GBP_USD", "USD_JPY"
+        ).contains(instrument)) {
+            throw new IllegalArgumentException(
+                    "Érvénytelen instrumentum!");
+        }
+
+        // Granularity ellenőrzése
+        if (!java.util.Set.of(
+                "H1", "H4", "D", "W"
+        ).contains(granularity)) {
+            throw new IllegalArgumentException(
+                    "Érvénytelen időfelbontás!");
+        }
+
+        // OANDA historikus gyertyák lekérése
+        return restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/v3/instruments/{instrument}/candles")
+                        .queryParam("count", 11)
+                        .queryParam("price", "M")
+                        .queryParam("granularity", granularity)
+                        .build(instrument))
+                .retrieve()
+                .body(String.class);
+    }
 }
