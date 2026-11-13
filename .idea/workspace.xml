@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18ad4b4c-7d2c-4541-99e5-849ca2071413" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/beadando/src/main/resources/static/style/fontawesome-all.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/beadando/src/main/resources/static/style/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/beadando/src/main/resources/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/beadando/src/main/resources/static/images/image1.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/beadando/src/main/java/org/example/beadando/BeadandoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/beadando/src/main/java/org/example/beadando/BeadandoApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/beadando/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/beadando/src/main/resources/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,22 +38,22 @@
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
       <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0000000104100224" />
-      <entry key="S30" value="1.0034916082042855" />
-      <entry key="S60" value="1.0974720609081108" />
-      <entry key="M2" value="1.8874099958311876" />
-      <entry key="M5" value="6.681492016648481" />
-      <entry key="M10" value="12.498444365753215" />
-      <entry key="M15" value="15.650199211117306" />
-      <entry key="M30" value="19.724400584538" />
-      <entry key="H1" value="22.191516762505525" />
-      <entry key="H2" value="23.550213047618776" />
-      <entry key="H4" value="24.263339431119043" />
-      <entry key="D1" value="24.87555555177978" />
-      <entry key="W1" value="24.98218093799614" />
+      <entry key="MS500" value="1.0005742633058061" />
+      <entry key="S2" value="1.1548024274919229" />
+      <entry key="S5" value="1.474144927058841" />
+      <entry key="S10" value="1.6886963624638929" />
+      <entry key="S30" value="2.205575724368897" />
+      <entry key="S60" value="4.979081488656016" />
+      <entry key="M2" value="12.72521178686123" />
+      <entry key="M5" value="28.499971503136653" />
+      <entry key="M10" value="41.81030180907707" />
+      <entry key="M15" value="49.46919227423503" />
+      <entry key="M30" value="60.64770706480343" />
+      <entry key="H1" value="68.31424100199096" />
+      <entry key="H2" value="72.86622283283093" />
+      <entry key="H4" value="75.35488771711135" />
+      <entry key="D1" value="77.54778067055874" />
+      <entry key="W1" value="77.9351120400655" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -77,23 +75,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.0647040577400861" />
-      <entry key="MS500" value="0.5783440919526437" />
-      <entry key="S2" value="0.8720604202809027" />
-      <entry key="S5" value="0.9467136312367139" />
-      <entry key="S10" value="0.972992111775587" />
-      <entry key="S30" value="0.9942964409496188" />
-      <entry key="S60" value="1.0915682846831383" />
-      <entry key="M2" value="1.8814052073809042" />
-      <entry key="M5" value="6.675258689135419" />
-      <entry key="M10" value="12.493517992423472" />
-      <entry key="M15" value="15.646305107301883" />
-      <entry key="M30" value="19.722071497060377" />
-      <entry key="H1" value="22.19023891991275" />
-      <entry key="H2" value="23.549543229250155" />
-      <entry key="H4" value="24.26299645150296" />
-      <entry key="D1" value="24.875497237015335" />
-      <entry key="W1" value="24.98217257870809" />
+      <entry key="MS100" value="0.8293195458144417" />
+      <entry key="MS500" value="0.9638104779571751" />
+      <entry key="S2" value="1.1437282071513082" />
+      <entry key="S5" value="1.4682447778736778" />
+      <entry key="S10" value="1.6852514966989907" />
+      <entry key="S30" value="2.202863337738878" />
+      <entry key="S60" value="4.972101254336608" />
+      <entry key="M2" value="12.714087008264855" />
+      <entry key="M5" value="28.489374937011576" />
+      <entry key="M10" value="41.802040668934474" />
+      <entry key="M15" value="49.46243437309742" />
+      <entry key="M30" value="60.64337229809803" />
+      <entry key="H1" value="68.31173719054233" />
+      <entry key="H2" value="72.86487002486189" />
+      <entry key="H4" value="75.35418361008882" />
+      <entry key="D1" value="77.547659241132" />
+      <entry key="W1" value="77.93509458997437" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -129,11 +127,15 @@
     "node.js.selected.package.jshint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Java-alkalmazasok-Eloadas\beadando\src\main\resources\static\images" />
+      <recent name="D:\Java-alkalmazasok-Eloadas\beadando\src\main\resources\static\style\images" />
+      <recent name="D:\Java-alkalmazasok-Eloadas\beadando\src\main\resources\static\style" />
+      <recent name="D:\Java-alkalmazasok-Eloadas\beadando\src\main\resources\static" />
       <recent name="D:\Java-alkalmazasok-Eloadas\beadando\src\main\resources\templates" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
