@@ -120,4 +120,12 @@ public class OandaService {
                 .retrieve()
                 .body(String.class);
     }
+    public String getOpenTrades() {
+
+        // Nyitott trade-ek lekérése az OANDA API-tól
+        return restClient.get()
+                .uri("/v3/accounts/{id}/openTrades", accountId)
+                .retrieve()
+                .body(String.class);
+    }
 }

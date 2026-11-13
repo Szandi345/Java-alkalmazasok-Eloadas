@@ -257,4 +257,54 @@ public class ForexController {
         }
         return "forex-open";
     }
+    @GetMapping("/forex/positions")
+    public String openPositions(Model model) {
+        try {
+            // OANDA API meghívása
+            String response = oandaService.getOpenTrades();
+
+            // JSON feldolgozása
+            JsonNode root = objectMapper.readTree(response);
+            JsonNode trades = root.path("trades");
+            if (!trades.isArray()) {
+                throw new IllegalStateException(
+                        "Nem érkezett megfelelő trade lista.");
+            }
+            java.util.List<java.util.Map<String, Object>> rows =
+                    new java.util.ArrayList<>();
+
+            // Nyitott trade-ek feldolgozása
+            for (JsonNode trade : trades) {
+                java.util.Map<String, Object> row =
+                        new java.util.LinkedHashMap<>();
+                String unitsText =
+                        trade.path("currentUnits").asText();
+                java.math.BigDecimal units =
+                        new java.math.BigDecimal(unitsText);
+                row.put("id",
+                        trade.path("id").asText());
+                row.put("instrument",
+                        trade.path("instrument").asText());
+                row.put("units", unitsText);
+                row.put("direction",
+                        units.signum() > 0 ? "Long" : "Short");
+                row.put("price",
+                        trade.path("price").asText());
+                row.put("openTime",
+                        trade.path("openTime").asText());
+                row.put("unrealizedPL",
+                        trade.path("unrealizedPL").asText());
+                rows.add(row);
+            }
+
+            // Adatok átadása a HTML oldalnak
+            model.addAttribute("positions", rows);
+            model.addAttribute("positionCount", rows.size());
+        } catch (Exception e) {
+            model.addAttribute("error",
+                    "Nem sikerült lekérni a nyitott pozíciókat. "
+                            + "Ellenőrizd az OANDA kapcsolatot!");
+        }
+        return "forex-positions";
+    }
 }
