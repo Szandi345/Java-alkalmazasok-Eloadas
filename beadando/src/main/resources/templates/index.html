@@ -1,251 +1,174 @@
-<!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html lang="">
+<!DOCTYPE html>
+<html lang="hu"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Java Előadás Beadandó</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/style/main.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Forex Dashboard – Főoldal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f5f9;
+        }
+        .hero {
+            background: linear-gradient(
+                    135deg, #192a56, #273c75
+            );
+            color: white;
+            padding: 75px 25px;
+            border-radius: 18px;
+        }
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            transition: transform 0.2s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 40px;
+        }
+        footer {
+            margin-top: 70px;
+            padding: 25px;
+            color: #777;
+        }
+    </style>
 </head>
-<body class="is-preload">
+<body>
 
-<!-- Wrapper -->
-<div id="wrapper">
+<!-- Közös navigáció -->
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<main class="container py-5">
 
-    <!-- Main -->
-    <div id="main">
-        <div class="inner">
+    <!-- Főoldali bemutatkozás -->
+    <section class="hero text-center mb-5">
+        <h1 class="display-5 fw-bold mb-3">
+            Forex Dashboard
+        </h1>
+        <p class="lead mb-4">
+            Devizaárfolyamok és Forex kereskedés
+            egyetlen alkalmazásban.
+        </p>
+        <p class="mb-4">
+            OANDA Practice demó kereskedés
+            és Magyar Nemzeti Bank árfolyamfigyelés.
+        </p>
+        <a href="/forex/account"
+           class="btn btn-light btn-lg">
+            Forex funkciók megnyitása
+        </a>
+    </section>
 
-            <!-- Header -->
-            <header id="header">
-                <a href="" class="logo">Főoldal</a>
-<!--                <ul class="icons">-->
-<!--                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
-<!--                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>-->
-<!--                    <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>-->
-<!--                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>-->
-<!--                    <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>-->
-<!--                </ul>-->
-            </header>
+    <!-- Funkciók -->
+    <h2 class="fw-bold mb-4">
+        Az alkalmazás funkciói
+    </h2>
+    <div class="row g-4">
 
-            <!-- Banner -->
-            <section id="banner">
-                <div class="content">
-                    <header>
-                        <h1>Bank/deviza alkalmazás</h1>
-<!--                        <p>A free and fully responsive site template</p>-->
-                    </header>
-                    <p>Számlázási adatok, deviza információk megtekintése</p>
-<!--                    <ul class="actions">-->
-<!--                        <li><a href="#" class="button big">Learn More</a></li>-->
-<!--                    </ul>-->
+        <!-- Forex -->
+        <div class="col-md-6">
+            <div class="card feature-card p-4">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        📈
+                    </div>
+                    <h3 class="card-title">
+                        Forex kereskedés
+                    </h3>
+                    <p class="card-text text-muted">
+                        Az OANDA Practice API segítségével
+                        megtekinthetők az árfolyamok,
+                        historikus adatok, valamint
+                        nyithatók és zárhatók
+                        demó kereskedési pozíciók.
+                    </p>
+                    <a href="/forex/account"
+                       class="btn btn-primary">
+                        Forex megnyitása
+                    </a>
                 </div>
-                <span class="image object">
-										<img src="/images/image1.jpg" alt="Stocks" />
-									</span>
-            </section>
+            </div>
+        </div>
 
-            <!-- Section -->
-<!--            <section>-->
-<!--                <header class="major">-->
-<!--                    <h2>Erat lacinia</h2>-->
-<!--                </header>-->
-<!--                <div class="features">-->
-<!--                    <article>-->
-<!--                        <span class="icon fa-gem"></span>-->
-<!--                        <div class="content">-->
-<!--                            <h3>Portitor ullamcorper</h3>-->
-<!--                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        </div>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <span class="icon solid fa-paper-plane"></span>-->
-<!--                        <div class="content">-->
-<!--                            <h3>Sapien veroeros</h3>-->
-<!--                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        </div>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <span class="icon solid fa-rocket"></span>-->
-<!--                        <div class="content">-->
-<!--                            <h3>Quam lorem ipsum</h3>-->
-<!--                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        </div>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <span class="icon solid fa-signal"></span>-->
-<!--                        <div class="content">-->
-<!--                            <h3>Sed magna finibus</h3>-->
-<!--                            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        </div>-->
-<!--                    </article>-->
-<!--                </div>-->
-<!--            </section>-->
-
-            <!-- Section -->
-<!--            <section>-->
-<!--                <header class="major">-->
-<!--                    <h2>Ipsum sed dolor</h2>-->
-<!--                </header>-->
-<!--                <div class="posts">-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic01.jpg" alt="" /></a>-->
-<!--                        <h3>Interdum aenean</h3>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        <ul class="actions">-->
-<!--                            <li><a href="#" class="button">More</a></li>-->
-<!--                        </ul>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic02.jpg" alt="" /></a>-->
-<!--                        <h3>Nulla amet dolore</h3>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        <ul class="actions">-->
-<!--                            <li><a href="#" class="button">More</a></li>-->
-<!--                        </ul>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic03.jpg" alt="" /></a>-->
-<!--                        <h3>Tempus ullamcorper</h3>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        <ul class="actions">-->
-<!--                            <li><a href="#" class="button">More</a></li>-->
-<!--                        </ul>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic04.jpg" alt="" /></a>-->
-<!--                        <h3>Sed etiam facilis</h3>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        <ul class="actions">-->
-<!--                            <li><a href="#" class="button">More</a></li>-->
-<!--                        </ul>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic05.jpg" alt="" /></a>-->
-<!--                        <h3>Feugiat lorem aenean</h3>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        <ul class="actions">-->
-<!--                            <li><a href="#" class="button">More</a></li>-->
-<!--                        </ul>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic06.jpg" alt="" /></a>-->
-<!--                        <h3>Amet varius aliquam</h3>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                        <ul class="actions">-->
-<!--                            <li><a href="#" class="button">More</a></li>-->
-<!--                        </ul>-->
-<!--                    </article>-->
-<!--                </div>-->
-<!--            </section>-->
-
+        <!-- MNB -->
+        <div class="col-md-6">
+            <div class="card feature-card p-4">
+                <div class="card-body">
+                    <div class="feature-icon mb-3">
+                        🏦
+                    </div>
+                    <h3 class="card-title">
+                        MNB árfolyamok
+                    </h3>
+                    <p class="card-text text-muted">
+                        A Magyar Nemzeti Bank hivatalos
+                        devizaárfolyamainak megjelenítése,
+                        historikus adatok lekérése
+                        és grafikonos ábrázolása.
+                    </p>
+                    <button class="btn btn-secondary"
+                            disabled>
+                        Hamarosan
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <div class="inner">
-
-            <!-- Search -->
-<!--            <section id="search" class="alt">-->
-<!--                <form method="post" action="#">-->
-<!--                    <input type="text" name="query" id="query" placeholder="Search" />-->
-<!--                </form>-->
-<!--            </section>-->
-
-            <!-- Menu -->
-            <nav id="menu">
-                <header class="major">
-                    <h2>Menü</h2>
-                </header>
-                <ul>
-                    <li><a href="">Főoldal</a></li>
-                    <li><a href="exercise">SOAP kliens</a></li>
-                    <li><a href="forex">Forex kliens</a></li>
-<!--                    <li>-->
-<!--                        <span class="opener">Submenu</span>-->
-<!--                        <ul>-->
-<!--                            <li><a href="#">Lorem Dolor</a></li>-->
-<!--                            <li><a href="#">Ipsum Adipiscing</a></li>-->
-<!--                            <li><a href="#">Tempus Magna</a></li>-->
-<!--                            <li><a href="#">Feugiat Veroeros</a></li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li><a href="#">Etiam Dolore</a></li>-->
-<!--                    <li><a href="#">Adipiscing</a></li>-->
-<!--                    <li>-->
-<!--                        <span class="opener">Another Submenu</span>-->
-<!--                        <ul>-->
-<!--                            <li><a href="#">Lorem Dolor</a></li>-->
-<!--                            <li><a href="#">Ipsum Adipiscing</a></li>-->
-<!--                            <li><a href="#">Tempus Magna</a></li>-->
-<!--                            <li><a href="#">Feugiat Veroeros</a></li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
-<!--                    <li><a href="#">Maximus Erat</a></li>-->
-<!--                    <li><a href="#">Sapien Mauris</a></li>-->
-<!--                    <li><a href="#">Amet Lacinia</a></li>-->
-                </ul>
-            </nav>
-
-            <!-- Section -->
-<!--            <section>-->
-<!--                <header class="major">-->
-<!--                    <h2>Ante interdum</h2>-->
-<!--                </header>-->
-<!--                <div class="mini-posts">-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>-->
-<!--                    </article>-->
-<!--                    <article>-->
-<!--                        <a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>-->
-<!--                        <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>-->
-<!--                    </article>-->
-<!--                </div>-->
-<!--                <ul class="actions">-->
-<!--                    <li><a href="#" class="button">More</a></li>-->
-<!--                </ul>-->
-<!--            </section>-->
-
-            <!-- Section -->
-<!--            <section>-->
-<!--                <header class="major">-->
-<!--                    <h2>Get in touch</h2>-->
-<!--                </header>-->
-<!--                <p>Sed varius enim lorem ullamcorper dolore aliquam aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore. Proin sed aliquam facilisis ante interdum. Sed nulla amet lorem feugiat tempus aliquam.</p>-->
-<!--                <ul class="contact">-->
-<!--                    <li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>-->
-<!--                    <li class="icon solid fa-phone">(000) 000-0000</li>-->
-<!--                    <li class="icon solid fa-home">1234 Somewhere Road #8254<br />-->
-<!--                        Nashville, TN 00000-0000</li>-->
-<!--                </ul>-->
-<!--            </section>-->
-
-            <!-- Footer -->
-            <footer id="footer">
-                <p class="copyright"><a>Készítette: <br> Laucsik Dominik (DILLSZ) <br> Sztroka Alexandra Laura (G34R4F)</a>.</p>
-            </footer>
-
+    <!-- Forex funkciók -->
+    <section class="mt-5">
+        <h2 class="fw-bold mb-4">
+            Elérhető Forex funkciók
+        </h2>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <a href="/forex/account"
+                   class="btn btn-outline-primary w-100">
+                    Számlainformációk
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/forex/price"
+                   class="btn btn-outline-primary w-100">
+                    Aktuális árfolyamok
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/forex/history"
+                   class="btn btn-outline-primary w-100">
+                    Historikus árfolyamok
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/forex/open"
+                   class="btn btn-outline-success w-100">
+                    Pozíció nyitása
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/forex/positions"
+                   class="btn btn-outline-primary w-100">
+                    Nyitott pozíciók
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="/forex/close"
+                   class="btn btn-outline-danger w-100">
+                    Pozíció zárása
+                </a>
+            </div>
         </div>
-    </div>
-
-</div>
-
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-
+    </section>
+</main>
+<footer id="footer">
+    <p class="copyright"><a>Készítette: <br> Laucsik Dominik (DILLSZ) <br> Sztroka Alexandra Laura (G34R4F)</a>.</p>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
