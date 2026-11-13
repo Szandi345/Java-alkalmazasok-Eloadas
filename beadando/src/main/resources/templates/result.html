@@ -2,11 +2,132 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SOAP kliens</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/style/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-<h1>Historical prices:</h1>
-    <p th:text="'Prices: ' + ${sendOut}" />
-    <a th:href="@{'/exercise'}">Back to the form</a>
+
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+                <a href="" class="logo">SOAP kliens</a>
+                <!--                <ul class="icons">-->
+                <!--                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
+                <!--                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>-->
+                <!--                    <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>-->
+                <!--                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>-->
+                <!--                    <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>-->
+                <!--                </ul>-->
+            </header>
+
+            <!-- Banner -->
+            <section id="banner">
+                <div class="content">
+                        <h1>Adatok:</h1>
+                    <p th:text="'Prices: ' + ${sendOut}" />
+                    <div id="adatok"
+                         th:data-response="${sendOut}">
+                    </div>
+                    <br>
+                        <h1>Diagram:</h1>
+                    <div style="width: 100%; max-width: 900px;">
+                        <canvas id="diagram"></canvas>
+                    </div>
+                    <a th:href="@{'/exercise'}">Vissza az űrlapra</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="inner">
+
+            <!-- Menu -->
+            <nav id="menu">
+                <header class="major">
+                    <h2>Menü</h2>
+                </header>
+                <ul>
+                    <li><a href="/">Főoldal</a></li>
+                    <li><a href="exercise">SOAP kliens</a></li>
+                    <li><a href="forex">Forex kliens</a></li>
+                </ul>
+            </nav>
+
+            <!-- Footer -->
+            <footer id="footer">
+                <p class="copyright"><a>Készítette: <br> Laucsik Dominik (DILLSZ) <br> Sztroka Alexandra Laura (G34R4F)</a>.</p>
+            </footer>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script>
+
+    const response = document.getElementById("adatok").dataset.response;
+
+    const adatok = response.split(";").slice(3).join(";");
+
+    if (adatok) {
+
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(adatok, "text/xml");
+        const days = Array.from(xml.getElementsByTagName("Day"));
+
+        const data = days.map(day => ({
+            date: day.getAttribute("date"),
+            rate: parseFloat(
+                day.getElementsByTagName("Rate")[0]
+                    .textContent.replace(",", ".")
+            )
+        }));
+
+        data.sort((a, b) => a.date.localeCompare(b.date));
+
+        new Chart(document.getElementById("diagram"), {
+            type: "line",
+
+            data: {
+                labels: data.map(item => item.date),
+
+                datasets: [{
+                    label: "Érték (HUF)",
+                    data: data.map(item => item.rate),
+                    borderColor: "#f56a6a",
+                    borderWidth: 2,
+                    tension: 0.3
+                }]
+            },
+
+            options: {
+                responsive: true
+            }
+        });
+
+    } else {
+        console.error("XML nem található");
+    }
+</script>
+
 </body>
 </html>

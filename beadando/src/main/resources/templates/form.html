@@ -2,19 +2,84 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>SOAP kliens</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/style/main.css" />
 </head>
-<body>
-<form action="#" th:action="@{/exercise}" th:object="${param}" method="post">
-    <select name="currencies" th:field="*{currency}">
-        <option value="EUR">EUR</option>
-        <option value="USD">USD</option>
-        <option value="GBP">GBP</option>
-        <option value="JPY">JPY</option>
-    </select><br>
-    Start date: <input type="date" th:field="*{startDate}"><br>
-    End date: <input type="date" th:field="*{endDate}"><br>
-    <input type="submit" value="Submit">
-</form>
+
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+    <!-- Main -->
+    <div id="main">
+        <div class="inner">
+
+            <!-- Header -->
+            <header id="header">
+                <a href="" class="logo">SOAP kliens</a>
+                <!--                <ul class="icons">-->
+                <!--                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
+                <!--                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>-->
+                <!--                    <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>-->
+                <!--                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>-->
+                <!--                    <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>-->
+                <!--                </ul>-->
+            </header>
+
+            <!-- Banner -->
+            <section id="banner">
+                <div class="content">
+                    <form action="#" th:action="@{/exercise}" th:object="${param}" method="post">
+                        <select name="currencies" th:field="*{currency}">
+                            <option value="EUR">EUR</option>
+                            <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
+                            <option value="JPY">JPY</option>
+                        </select><br>
+                        Kezdő dátum: <input type="date" th:field="*{startDate}"><br>
+                        Befejező dátum: <input type="date" th:field="*{endDate}"><br>
+                        <input type="submit" value="Küldés">
+                    </form>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="inner">
+
+            <!-- Menu -->
+            <nav id="menu">
+                <header class="major">
+                    <h2>Menü</h2>
+                </header>
+                <ul>
+                    <li><a href="/">Főoldal</a></li>
+                    <li><a href="exercise">SOAP kliens</a></li>
+                    <li><a href="forex">Forex kliens</a></li>
+                </ul>
+            </nav>
+
+            <!-- Footer -->
+            <footer id="footer">
+                <p class="copyright"><a>Készítette: <br> Laucsik Dominik (DILLSZ) <br> Sztroka Alexandra Laura (G34R4F)</a>.</p>
+            </footer>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
 </body>
 </html>
