@@ -20,6 +20,11 @@ public class BeadandoApplication {
     public static void main(String[] args) {
         SpringApplication.run(BeadandoApplication.class, args);
     }
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
     @GetMapping("/exercise")
     public String soap1(Model model) {
         model.addAttribute("param", new MessagePrice());

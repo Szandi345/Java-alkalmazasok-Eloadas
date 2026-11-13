@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="18ad4b4c-7d2c-4541-99e5-849ca2071413" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/beadando/src/main/java/org/example/beadando/MessagePrice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/beadando/src/main/resources/static/style/fontawesome-all.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/beadando/src/main/resources/static/style/main.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/beadando/src/main/resources/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/beadando/src/main/java/org/example/beadando/BeadandoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/beadando/src/main/java/org/example/beadando/BeadandoApplication.java" afterDir="false" />
     </list>
@@ -18,11 +20,15 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/beadando/src/main/resources/templates/main.css" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -30,6 +36,65 @@
         <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0000000104100224" />
+      <entry key="S30" value="1.0034916082042855" />
+      <entry key="S60" value="1.0974720609081108" />
+      <entry key="M2" value="1.8874099958311876" />
+      <entry key="M5" value="6.681492016648481" />
+      <entry key="M10" value="12.498444365753215" />
+      <entry key="M15" value="15.650199211117306" />
+      <entry key="M30" value="19.724400584538" />
+      <entry key="H1" value="22.191516762505525" />
+      <entry key="H2" value="23.550213047618776" />
+      <entry key="H4" value="24.263339431119043" />
+      <entry key="D1" value="24.87555555177978" />
+      <entry key="W1" value="24.98218093799614" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.0647040577400861" />
+      <entry key="MS500" value="0.5783440919526437" />
+      <entry key="S2" value="0.8720604202809027" />
+      <entry key="S5" value="0.9467136312367139" />
+      <entry key="S10" value="0.972992111775587" />
+      <entry key="S30" value="0.9942964409496188" />
+      <entry key="S60" value="1.0915682846831383" />
+      <entry key="M2" value="1.8814052073809042" />
+      <entry key="M5" value="6.675258689135419" />
+      <entry key="M10" value="12.493517992423472" />
+      <entry key="M15" value="15.646305107301883" />
+      <entry key="M30" value="19.722071497060377" />
+      <entry key="H1" value="22.19023891991275" />
+      <entry key="H2" value="23.549543229250155" />
+      <entry key="H4" value="24.26299645150296" />
+      <entry key="D1" value="24.875497237015335" />
+      <entry key="W1" value="24.98217257870809" />
+    </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7,
@@ -42,9 +107,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "Maven.beadando [clean].executor": "Run",
     "Maven.beadando [install].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
@@ -53,14 +123,19 @@
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Java-alkalmazasok-Eloadas\beadando\src\main\resources\templates" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="org.example.beadando" />
     </key>
