@@ -1,173 +1,260 @@
 <!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
     <title>Forex – Pozíció nyitása</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+
+    <!-- Eredeti piros Editorial dizájn -->
     <link rel="stylesheet" th:href="@{/style/main.css}">
+    <style>
+        .trade-card {
+            border: 1px solid #d2d7d9;
+            border-radius: 0.5em;
+            padding: 2em;
+            margin: 2em 0;
+            background: #ffffff;
+        }
+        .trade-card label {
+            display: block;
+            margin-bottom: 0.6em;
+            font-weight: 600;
+        }
+        .trade-card select,
+        .trade-card input[type="number"] {
+            width: 100%;
+        }
+        .trade-help {
+            color: #7f888f;
+            font-size: 0.9em;
+            margin-top: 0.6em;
+        }
+        .trade-notice {
+            padding: 1em 1.5em;
+            border-radius: 0.3em;
+            margin: 1.5em 0;
+            border-left: 4px solid;
+        }
+        .notice-info {
+            background: #eef5ff;
+            border-color: #4a90e2;
+            color: #24518a;
+        }
+        .notice-success {
+            background: #e9f7ef;
+            border-color: #2e9d70;
+            color: #216e4c;
+        }
+        .notice-warning {
+            background: #fff8e5;
+            border-color: #e0a800;
+            color: #8a6500;
+        }
+        .notice-error {
+            background: #fff0f0;
+            border-color: #f56a6a;
+            color: #a94442;
+        }
+        .trade-result {
+            margin-top: 2em;
+        }
+        .trade-result td,
+        .trade-result th {
+            overflow-wrap: anywhere;
+        }
+        .trade-actions {
+            margin-top: 2em;
+        }
+    </style>
 </head>
-<body>
+<body class="is-preload">
+<div id="wrapper">
 
-<!-- Navigáció -->
-<div th:replace="~{fragments/navbar :: navbar}"></div>
-<div class="container py-5">
-    <h1 class="fw-bold mb-2">
-        Forex – Pozíció nyitása
-    </h1>
-    <p class="text-muted mb-4">
-        OANDA Practice – piaci megbízás
-    </p>
+    <!-- Fő tartalom -->
+    <div id="main">
+        <div class="inner">
 
-    <!-- Pozíciónyitó űrlap -->
-    <div class="card info-card p-4 mb-4">
-        <h4 class="mb-4">
-            Új pozíció megnyitása
-        </h4>
-        <form th:action="@{/forex/open}"
-              method="post"
-              id="openForm">
-            <input th:if="${_csrf != null}"
-                   type="hidden"
-                   th:name="${_csrf.parameterName}"
-                   th:value="${_csrf.token}">
+            <!-- Fejléc -->
+            <header id="header">
+                <a th:href="@{/}" class="logo">
+                    <strong>Forex és MNB</strong> Dashboard
+                </a>
+            </header>
+            <section>
+                <header class="main">
+                    <h1>Forex – Pozíció nyitása</h1>
+                </header>
+                <p>
+                    OANDA Practice – piaci megbízás
+                    demó kereskedési számlán.
+                </p>
 
-            <!-- Instrumentum -->
-            <div class="mb-3">
-                <label for="instrument"
-                       class="form-label">
-                    Instrumentum
-                </label>
-                <select id="instrument"
-                        name="instrument"
-                        class="form-select">
-                    <option value="EUR_USD"
-                            th:selected="${selectedInstrument == 'EUR_USD'}">
-                        EUR/USD
-                    </option>
-                    <option value="GBP_USD"
-                            th:selected="${selectedInstrument == 'GBP_USD'}">
-                        GBP/USD
-                    </option>
-                    <option value="USD_JPY"
-                            th:selected="${selectedInstrument == 'USD_JPY'}">
-                        USD/JPY
-                    </option>
-                </select>
-            </div>
+                <!-- Pozíciónyitó űrlap -->
+                <div class="trade-card">
+                    <header class="major">
+                        <h2>Új pozíció megnyitása</h2>
+                    </header>
+                    <form th:action="@{/forex/open}"
+                          method="post"
+                          id="openForm">
 
-            <!-- Mennyiség -->
-            <div class="mb-3">
-                <label for="units"
-                       class="form-label">
-                    Mennyiség (units)
-                </label>
-                <input type="number"
-                       id="units"
-                       name="units"
-                       class="form-control"
-                       th:value="${units}"
-                       min="-1000"
-                       max="1000"
-                       step="1"
-                       required>
-                <div class="form-text">
-                    Pozitív = Long (vétel),
-                    negatív = Short (eladás).
-                    Nulla nem megengedett.
+                        <!-- CSRF -->
+                        <input th:if="${_csrf != null}"
+                               type="hidden"
+                               th:name="${_csrf.parameterName}"
+                               th:value="${_csrf.token}">
+                        <div class="row gtr-uniform">
+
+                            <!-- Instrumentum -->
+                            <div class="col-6 col-12-small">
+                                <label for="instrument">
+                                    Instrumentum
+                                </label>
+                                <select id="instrument"
+                                        name="instrument">
+                                    <option value="EUR_USD"
+                                            th:selected="${selectedInstrument == 'EUR_USD'}">
+                                        EUR/USD
+                                    </option>
+                                    <option value="GBP_USD"
+                                            th:selected="${selectedInstrument == 'GBP_USD'}">
+                                        GBP/USD
+                                    </option>
+                                    <option value="USD_JPY"
+                                            th:selected="${selectedInstrument == 'USD_JPY'}">
+                                        USD/JPY
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Mennyiség -->
+                            <div class="col-6 col-12-small">
+                                <label for="units">
+                                    Mennyiség (units)
+                                </label>
+                                <input type="number"
+                                       id="units"
+                                       name="units"
+                                       th:value="${units}"
+                                       min="-1000"
+                                       max="1000"
+                                       step="1"
+                                       required>
+                                <p class="trade-help">
+                                    Pozitív = Long (vétel),
+                                    negatív = Short (eladás).
+                                    Nulla nem megengedett.
+                                </p>
+                            </div>
+                            <div class="col-12">
+
+                                <!-- Irány -->
+                                <div id="direction"
+                                     class="trade-notice notice-info">
+                                    Long – Vételi megbízás
+                                </div>
+
+                                <!-- Figyelmeztetés -->
+                                <div class="trade-notice notice-warning">
+                                    Figyelem! A megbízás
+                                    elküldése virtuális kereskedést
+                                    indít az OANDA Practice számlán.
+                                </div>
+                                <button type="submit"
+                                        id="submitButton"
+                                        class="primary">
+                                    Pozíció nyitása
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </div>
 
-            <!-- Irány kijelzése -->
-            <div id="direction"
-                 class="alert alert-info">
-                Long – Vételi megbízás
-            </div>
-            <div class="alert alert-warning">
-                Figyelem! A megbízás elküldése
-                virtuális kereskedést indít az
-                OANDA Practice számlán.
-            </div>
-            <button type="submit"
-                    id="submitButton"
-                    class="btn btn-success">
-                Pozíció nyitása
-            </button>
-        </form>
-    </div>
+                <!-- Sikeres végrehajtás -->
+                <div th:if="${success}"
+                     class="trade-notice notice-success"
+                     th:text="${success}">
+                </div>
 
-    <!-- Sikeres végrehajtás -->
-    <div th:if="${success}"
-         class="alert alert-success"
-         th:text="${success}">
-    </div>
+                <!-- Figyelmeztetés -->
+                <div th:if="${warning}"
+                     class="trade-notice notice-warning"
+                     th:text="${warning}">
+                </div>
 
-    <!-- Figyelmeztetés -->
-    <div th:if="${warning}"
-         class="alert alert-warning"
-         th:text="${warning}">
-    </div>
+                <!-- Hiba -->
+                <div th:if="${error}"
+                     class="trade-notice notice-error"
+                     th:text="${error}">
+                </div>
 
-    <!-- Hiba -->
-    <div th:if="${error}"
-         class="alert alert-danger"
-         th:text="${error}">
-    </div>
+                <!-- Végrehajtási adatok -->
+                <div th:if="${executedPrice != null}"
+                     class="trade-result">
+                    <header class="major">
+                        <h2>Megbízás eredménye</h2>
+                    </header>
+                    <div class="table-wrapper">
+                        <table>
+                            <tbody>
+                            <tr>
+                                <th>Instrumentum</th>
+                                <td th:text="${instrument}"></td>
+                            </tr>
+                            <tr>
+                                <th>Végrehajtott mennyiség</th>
+                                <td th:text="${executedUnits}"></td>
+                            </tr>
+                            <tr>
+                                <th>Végrehajtási ár</th>
+                                <td th:text="${executedPrice}"></td>
+                            </tr>
+                            <tr>
+                                <th>Tranzakció azonosító</th>
+                                <td th:text="${transactionId}"></td>
+                            </tr>
+                            <tr th:if="${tradeId != null}">
+                                <th>Trade ID</th>
+                                <td th:text="${tradeId}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-    <!-- Végrehajtási adatok -->
-    <div th:if="${executedPrice != null}"
-         class="card info-card p-4">
-        <h4 class="mb-4">
-            Megbízás eredménye
-        </h4>
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <tbody>
-                <tr>
-                    <th>Instrumentum</th>
-                    <td th:text="${instrument}"></td>
-                </tr>
-                <tr>
-                    <th>Végrehajtott mennyiség</th>
-                    <td th:text="${executedUnits}"></td>
-                </tr>
-                <tr>
-                    <th>Végrehajtási ár</th>
-                    <td th:text="${executedPrice}"></td>
-                </tr>
-                <tr>
-                    <th>Tranzakció azonosító</th>
-                    <td th:text="${transactionId}"></td>
-                </tr>
-                <tr th:if="${tradeId != null}">
-                    <th>Trade ID</th>
-                    <td th:text="${tradeId}"></td>
-                </tr>
-                </tbody>
-            </table>
+                <!-- Navigációs gombok -->
+                <div class="trade-actions">
+                    <ul class="actions">
+                        <li>
+                            <a th:href="@{/forex/account}"
+                               class="button">
+                                Számlainformációk
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/forex/price}"
+                               class="button">
+                                Aktuális árfolyamok
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/forex/history}"
+                               class="button">
+                                Historikus árfolyamok
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
         </div>
     </div>
-    <div class="mt-4 d-flex gap-2 flex-wrap">
-        <a href="/forex/account"
-           class="btn btn-outline-secondary">
-            Számlainformációk
-        </a>
-        <a href="/forex/price"
-           class="btn btn-outline-primary">
-            Aktuális árfolyamok
-        </a>
-        <a href="/forex/history"
-           class="btn btn-outline-primary">
-            Historikus árfolyamok
-        </a>
-    </div>
+
+    <!-- Közös Editorial navigáció -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
 </div>
-<footer id="footer">
-    <p class="copyright"><a>Készítette: <br> Laucsik Dominik (DILLSZ) <br> Sztroka Alexandra Laura (G34R4F)</a>.</p>
-</footer>
+
+<!-- Irány kijelzése és validáció -->
 <script>
     const unitsInput = document.getElementById("units");
     const direction = document.getElementById("direction");
@@ -175,23 +262,24 @@
     const submitButton = document.getElementById("submitButton");
     function updateDirection() {
         const units = Number(unitsInput.value);
+
         if (!unitsInput.value || units === 0) {
-            direction.className = "alert alert-warning";
+            direction.className = "trade-notice notice-warning";
             direction.textContent =
                 "Adj meg nullától eltérő mennyiséget!";
         } else if (units > 0) {
-            direction.className = "alert alert-success";
+            direction.className = "trade-notice notice-success";
             direction.textContent =
                 "Long – Vételi megbízás";
         } else {
-            direction.className = "alert alert-danger";
+            direction.className = "trade-notice notice-error";
             direction.textContent =
                 "Short – Eladási megbízás";
         }
     }
     unitsInput.addEventListener("input", updateDirection);
     updateDirection();
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", function (event) {
         const units = Number(unitsInput.value);
         if (!Number.isInteger(units) ||
             units === 0 ||
@@ -215,6 +303,8 @@
         submitButton.textContent = "Megbízás küldése...";
     });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Közös navigáció JavaScript -->
+<script th:src="@{/js/navbar.js}"></script>
 </body>
 </html>

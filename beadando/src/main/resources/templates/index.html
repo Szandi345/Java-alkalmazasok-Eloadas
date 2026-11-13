@@ -1,174 +1,184 @@
 <!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
-    <title>Forex Dashboard – Főoldal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
-    <style>
-        body {
-            background-color: #f3f5f9;
-        }
-        .hero {
-            background: linear-gradient(
-                    135deg, #192a56, #273c75
-            );
-            color: white;
-            padding: 75px 25px;
-            border-radius: 18px;
-        }
-        .feature-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            transition: transform 0.2s;
-            height: 100%;
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        .feature-icon {
-            font-size: 40px;
-        }
-        footer {
-            margin-top: 70px;
-            padding: 25px;
-            color: #777;
-        }
-    </style>
+    <title>Forex és MNB Dashboard</title>
+
+    <!-- Az eredeti piros Editorial stílus -->
+    <link rel="stylesheet" th:href="@{/style/main.css}">
 </head>
-<body>
+<body class="is-preload">
+<div id="wrapper">
 
-<!-- Közös navigáció -->
-<div th:replace="~{fragments/navbar :: navbar}"></div>
-<main class="container py-5">
+    <!-- Fő tartalom -->
+    <div id="main">
+        <div class="inner">
+            <header id="header">
+                <a th:href="@{/}" class="logo">
+                    <strong>Forex és MNB</strong> Dashboard
+                </a>
+            </header>
 
-    <!-- Főoldali bemutatkozás -->
-    <section class="hero text-center mb-5">
-        <h1 class="display-5 fw-bold mb-3">
-            Forex Dashboard
-        </h1>
-        <p class="lead mb-4">
-            Devizaárfolyamok és Forex kereskedés
-            egyetlen alkalmazásban.
-        </p>
-        <p class="mb-4">
-            OANDA Practice demó kereskedés
-            és Magyar Nemzeti Bank árfolyamfigyelés.
-        </p>
-        <a href="/forex/account"
-           class="btn btn-light btn-lg">
-            Forex funkciók megnyitása
-        </a>
-    </section>
-
-    <!-- Funkciók -->
-    <h2 class="fw-bold mb-4">
-        Az alkalmazás funkciói
-    </h2>
-    <div class="row g-4">
-
-        <!-- Forex -->
-        <div class="col-md-6">
-            <div class="card feature-card p-4">
-                <div class="card-body">
-                    <div class="feature-icon mb-3">
-                        📈
-                    </div>
-                    <h3 class="card-title">
-                        Forex kereskedés
-                    </h3>
-                    <p class="card-text text-muted">
-                        Az OANDA Practice API segítségével
-                        megtekinthetők az árfolyamok,
-                        historikus adatok, valamint
-                        nyithatók és zárhatók
-                        demó kereskedési pozíciók.
+            <!-- Bemutatkozás -->
+            <section id="banner">
+                <div class="content">
+                    <header>
+                        <h1>Forex és MNB<br>Dashboard</h1>
+                        <p>Devizaárfolyamok és demó kereskedés</p>
+                    </header>
+                    <p>
+                        Java Spring Boot alkalmazás, amely
+                        az OANDA Practice REST API és a
+                        Magyar Nemzeti Bank SOAP
+                        szolgáltatásait használja.
                     </p>
-                    <a href="/forex/account"
-                       class="btn btn-primary">
-                        Forex megnyitása
-                    </a>
+                    <ul class="actions">
+                        <li>
+                            <a th:href="@{/forex/account}"
+                               class="button big">
+                                Forex megnyitása
+                            </a>
+                        </li>
+                        <li>
+                            <a th:href="@{/exercise}"
+                               class="button big">
+                                MNB árfolyamok
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-        </div>
+                <span class="image object">
+                    <img th:src="@{/images/image1.jpg}"
+                         alt="Devizaárfolyamok">
+                </span>
+            </section>
 
-        <!-- MNB -->
-        <div class="col-md-6">
-            <div class="card feature-card p-4">
-                <div class="card-body">
-                    <div class="feature-icon mb-3">
-                        🏦
-                    </div>
-                    <h3 class="card-title">
-                        MNB árfolyamok
-                    </h3>
-                    <p class="card-text text-muted">
-                        A Magyar Nemzeti Bank hivatalos
-                        devizaárfolyamainak megjelenítése,
-                        historikus adatok lekérése
-                        és grafikonos ábrázolása.
-                    </p>
-                    <button class="btn btn-secondary"
-                            disabled>
-                        Hamarosan
-                    </button>
+            <!-- Fő funkciók -->
+            <section>
+                <header class="major">
+                    <h2>Szolgáltatások</h2>
+                </header>
+                <div class="features">
+                    <article>
+                        <span class="icon solid fa-chart-line"></span>
+                        <div class="content">
+                            <h3>Forex árfolyamok</h3>
+                            <p>
+                                Aktuális devizaárfolyamok
+                                lekérése az OANDA API-val.
+                            </p>
+                            <a th:href="@{/forex/price}"
+                               class="button small">
+                                Megnyitás
+                            </a>
+                        </div>
+                    </article>
+                    <article>
+                        <span class="icon solid fa-chart-bar"></span>
+                        <div class="content">
+                            <h3>Historikus árfolyamok</h3>
+                            <p>
+                                Korábbi árfolyamadatok
+                                és grafikonok megjelenítése.
+                            </p>
+                            <a th:href="@{/forex/history}"
+                               class="button small">
+                                Megnyitás
+                            </a>
+                        </div>
+                    </article>
+                    <article>
+                        <span class="icon solid fa-coins"></span>
+                        <div class="content">
+                            <h3>Forex kereskedés</h3>
+                            <p>
+                                Demó pozíciók nyitása,
+                                megtekintése és zárása.
+                            </p>
+                            <a th:href="@{/forex/open}"
+                               class="button small">
+                                Pozíció nyitása
+                            </a>
+                        </div>
+                    </article>
+                    <article>
+                        <span class="icon solid fa-landmark"></span>
+                        <div class="content">
+                            <h3>MNB SOAP árfolyamok</h3>
+                            <p>
+                                Hivatalos devizaárfolyamok
+                                lekérése dátum és devizanem
+                                alapján.
+                            </p>
+                            <a th:href="@{/exercise}"
+                               class="button small">
+                                Megnyitás
+                            </a>
+                        </div>
+                    </article>
                 </div>
-            </div>
+            </section>
+
+            <!-- Forex funkciók -->
+            <section>
+                <header class="major">
+                    <h2>Forex funkciók</h2>
+                </header>
+                <div class="row">
+                    <div class="col-6 col-12-small">
+                        <ul class="actions stacked">
+                            <li>
+                                <a th:href="@{/forex/account}"
+                                   class="button fit">
+                                    Számlainformációk
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/forex/price}"
+                                   class="button fit">
+                                    Aktuális árfolyamok
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/forex/history}"
+                                   class="button fit">
+                                    Historikus árfolyamok
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-12-small">
+                        <ul class="actions stacked">
+                            <li>
+                                <a th:href="@{/forex/open}"
+                                   class="button fit">
+                                    Pozíció nyitása
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/forex/positions}"
+                                   class="button fit">
+                                    Nyitott pozíciók
+                                </a>
+                            </li>
+                            <li>
+                                <a th:href="@{/forex/close}"
+                                   class="button fit">
+                                    Pozíció zárása
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
 
-    <!-- Forex funkciók -->
-    <section class="mt-5">
-        <h2 class="fw-bold mb-4">
-            Elérhető Forex funkciók
-        </h2>
-        <div class="row g-3">
-            <div class="col-md-4">
-                <a href="/forex/account"
-                   class="btn btn-outline-primary w-100">
-                    Számlainformációk
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/forex/price"
-                   class="btn btn-outline-primary w-100">
-                    Aktuális árfolyamok
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/forex/history"
-                   class="btn btn-outline-primary w-100">
-                    Historikus árfolyamok
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/forex/open"
-                   class="btn btn-outline-success w-100">
-                    Pozíció nyitása
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/forex/positions"
-                   class="btn btn-outline-primary w-100">
-                    Nyitott pozíciók
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="/forex/close"
-                   class="btn btn-outline-danger w-100">
-                    Pozíció zárása
-                </a>
-            </div>
-        </div>
-    </section>
-</main>
-<footer id="footer">
-    <p class="copyright"><a>Készítette: <br> Laucsik Dominik (DILLSZ) <br> Sztroka Alexandra Laura (G34R4F)</a>.</p>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Közös Editorial oldalsáv -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+</div>
+<script th:src="@{/js/navbar.js}"></script>
 </body>
 </html>

@@ -1,76 +1,68 @@
 <!DOCTYPE html>
-<html lang="hu"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark" style="background-color: #192a56;">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="/">
-            Forex Dashboard
-        </a>
-        <button class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarMenu"
-                aria-controls="navbarMenu"
-                aria-expanded="false"
-                aria-label="Navigáció megnyitása">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse"
-             id="navbarMenu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">
-                        Főoldal
+<div id="sidebar" th:fragment="navbar">
+    <div class="inner">
+        <nav id="menu">
+            <header class="major">
+                <h2>Menü</h2>
+            </header>
+            <ul>
+                <li>
+                    <a th:href="@{/}">Főoldal</a>
+                </li>
+                <li>
+                    <a th:href="@{/exercise}">
+                        MNB SOAP árfolyamok
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"
-                       href="#"
-                       role="button"
-                       data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Forex
-                    </a>
-                    <ul class="dropdown-menu">
+                <li>
+                    <span class="opener">
+                        Forex funkciók
+                    </span>
+                    <ul>
                         <li>
-                            <a class="dropdown-item" href="/forex/account">
+                            <a th:href="@{/forex/account}">
                                 Számlainformációk
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/forex/price">
+                            <a th:href="@{/forex/price}">
                                 Aktuális árfolyamok
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/forex/history">
+                            <a th:href="@{/forex/history}">
                                 Historikus árfolyamok
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/forex/open">
+                            <a th:href="@{/forex/open}">
                                 Pozíció nyitása
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/forex/positions">
+                            <a th:href="@{/forex/positions}">
                                 Nyitott pozíciók
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="/forex/close">
+                            <a th:href="@{/forex/close}">
                                 Pozíció zárása
                             </a>
                         </li>
                     </ul>
                 </li>
             </ul>
-            <span class="badge bg-success ms-lg-3">
-                OANDA DEMO
-            </span>
-        </div>
+        </nav>
+        <footer id="footer">
+            <p class="copyright">
+                Készítette:<br>
+                Laucsik Dominik (DILLSZ)<br>
+                Sztroka Alexandra Laura (G34R4F)
+            </p>
+        </footer>
     </div>
-</nav>
+</div>
 </body>
 </html>

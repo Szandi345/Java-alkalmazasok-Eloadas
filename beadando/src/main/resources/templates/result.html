@@ -1,133 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>SOAP kliens</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/style/main.css" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>MNB SOAP – Árfolyam eredmények</title>
+
+    <!-- Editorial CSS -->
+    <link rel="stylesheet" th:href="@{/style/main.css}">
+
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .result-card {
+            background: #ffffff;
+            border: 1px solid #d2d7d9;
+            border-radius: 0.5em;
+            padding: 2em;
+            margin: 2em 0;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 380px;
+        }
+        .chart-container canvas {
+            max-width: 100%;
+        }
+        .xml-output {
+            background: #f5f6f7;
+            border: 1px solid #d2d7d9;
+            border-radius: 0.4em;
+            padding: 1em;
+            max-height: 250px;
+            overflow: auto;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-size: 0.85em;
+        }
+        .error-message {
+            padding: 1em 1.5em;
+            background: #fff0f0;
+            border-left: 4px solid #f56a6a;
+            color: #a94442;
+            margin: 1.5em 0;
+        }
+    </style>
 </head>
-
 <body class="is-preload">
-
-<!-- Wrapper -->
 <div id="wrapper">
 
-    <!-- Main -->
+    <!-- Fő tartalom -->
     <div id="main">
         <div class="inner">
-
-            <!-- Header -->
             <header id="header">
-                <a href="" class="logo">SOAP kliens</a>
-                <!--                <ul class="icons">-->
-                <!--                    <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
-                <!--                    <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>-->
-                <!--                    <li><a href="#" class="icon brands fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>-->
-                <!--                    <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>-->
-                <!--                    <li><a href="#" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>-->
-                <!--                </ul>-->
+                <a th:href="@{/}" class="logo">
+                    <strong>Forex és MNB</strong> Dashboard
+                </a>
             </header>
+            <section>
+                <header class="main">
+                    <h1>MNB SOAP – Árfolyam eredmények</h1>
+                </header>
+                <p>
+                    Magyar Nemzeti Bank –
+                    historikus devizaárfolyamok.
+                </p>
 
-            <!-- Banner -->
-            <section id="banner">
-                <div class="content">
-                        <h1>Adatok:</h1>
-                    <p th:text="'Prices: ' + ${sendOut}" />
+                <!-- XML eredmény -->
+                <div class="result-card">
+                    <header class="major">
+                        <h2>Lekérdezett adatok</h2>
+                    </header>
+                    <p>
+                        Az MNB SOAP szolgáltatásától
+                        visszakapott XML-adatok:
+                    </p>
+                    <pre class="xml-output"
+                         th:text="${sendOut}"></pre>
+
+                    <!-- XML a JavaScript számára -->
                     <div id="adatok"
-                         th:data-response="${sendOut}">
+                         th:data-response="${sendOut}"
+                         hidden>
                     </div>
-                    <br>
-                        <h1>Diagram:</h1>
-                    <div style="width: 100%; max-width: 900px;">
+                </div>
+
+                <!-- Grafikon -->
+                <div class="result-card">
+                    <header class="major">
+                        <h2>Árfolyamdiagram</h2>
+                    </header>
+                    <div class="chart-container">
                         <canvas id="diagram"></canvas>
                     </div>
-                    <a th:href="@{'/exercise'}">Vissza az űrlapra</a>
+                    <div id="chartError"
+                         class="error-message"
+                         style="display: none;">
+                        Nem sikerült feldolgozni
+                        az árfolyamadatokat.
+                    </div>
                 </div>
-            </section>
 
-        </div>
-    </div>
-
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <div class="inner">
-
-            <!-- Menu -->
-            <nav id="menu">
-                <header class="major">
-                    <h2>Menü</h2>
-                </header>
-                <ul>
-                    <li><a href="/">Főoldal</a></li>
-                    <li><a href="exercise">SOAP kliens</a></li>
-                    <li><a href="forex">Forex kliens</a></li>
+                <!-- Vissza -->
+                <ul class="actions">
+                    <li>
+                        <a th:href="@{/exercise}"
+                           class="button primary">
+                            Új lekérdezés
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/}"
+                           class="button">
+                            Főoldal
+                        </a>
+                    </li>
                 </ul>
-            </nav>
-
-            <!-- Footer -->
-            <footer id="footer">
-                <p class="copyright"><a>Készítette: <br> Laucsik Dominik (DILLSZ) <br> Sztroka Alexandra Laura (G34R4F)</a>.</p>
-            </footer>
-
+            </section>
         </div>
     </div>
 
+    <!-- Közös Editorial navigáció -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
 </div>
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-
+<!-- MNB árfolyamdiagram -->
 <script>
-
     const response = document.getElementById("adatok").dataset.response;
-
-    const adatok = response.split(";").slice(3).join(";");
-
-    if (adatok) {
-
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(adatok, "text/xml");
-        const days = Array.from(xml.getElementsByTagName("Day"));
-
-        const data = days.map(day => ({
-            date: day.getAttribute("date"),
-            rate: parseFloat(
-                day.getElementsByTagName("Rate")[0]
-                    .textContent.replace(",", ".")
-            )
-        }));
-
-        data.sort((a, b) => a.date.localeCompare(b.date));
-
-        new Chart(document.getElementById("diagram"), {
-            type: "line",
-
-            data: {
-                labels: data.map(item => item.date),
-
-                datasets: [{
-                    label: "Érték (HUF)",
-                    data: data.map(item => item.rate),
-                    borderColor: "#f56a6a",
-                    borderWidth: 2,
-                    tension: 0.3
-                }]
-            },
-
-            options: {
-                responsive: true
+    const chartError = document.getElementById("chartError");
+    if (response && typeof Chart !== "undefined") {
+        try {
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(response, "text/xml");
+            if (xml.getElementsByTagName("parsererror").length > 0) {
+                throw new Error("Hibás XML-válasz.");
             }
-        });
-
+            const days = Array.from(
+                xml.getElementsByTagName("Day")
+            );
+            const data = days.map(day => {
+                const rateElement =
+                    day.getElementsByTagName("Rate")[0];
+                if (!rateElement) {
+                    return null;
+                }
+                const rate = parseFloat(
+                    rateElement.textContent
+                        .trim()
+                        .replace(",", ".")
+                );
+                if (!Number.isFinite(rate)) {
+                    return null;
+                }
+                return {
+                    date: day.getAttribute("date"),
+                    rate: rate
+                };
+            }).filter(item => item !== null);
+            data.sort((a, b) =>
+                a.date.localeCompare(b.date)
+            );
+            if (data.length === 0) {
+                throw new Error("Nincsenek megjeleníthető árfolyamok.");
+            }
+            new Chart(document.getElementById("diagram"), {
+                type: "line",
+                data: {
+                    labels: data.map(item => item.date),
+                    datasets: [{
+                        label: "Árfolyam (HUF)",
+                        data: data.map(item => item.rate),
+                        borderColor: "#f56a6a",
+                        backgroundColor: "rgba(245,106,106,0.12)",
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false
+                        }
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("MNB diagram hiba:", error);
+            chartError.style.display = "block";
+            chartError.textContent = error.message;
+        }
     } else {
-        console.error("XML nem található");
+        chartError.style.display = "block";
+        chartError.textContent =
+            "Nem érhető el az XML-válasz vagy a Chart.js könyvtár.";
     }
 </script>
-
+<!-- Közös navigáció -->
+<script th:src="@{/js/navbar.js}"></script>
 </body>
 </html>

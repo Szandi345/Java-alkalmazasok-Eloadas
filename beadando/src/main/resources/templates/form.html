@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>SOAP kliens</title>
@@ -46,35 +46,10 @@
         </div>
     </div>
 
-    <!-- Sidebar -->
-    <div id="sidebar">
-        <div class="inner">
-
-            <!-- Menu -->
-            <nav id="menu">
-                <header class="major">
-                    <h2>Menü</h2>
-                </header>
-                <ul>
-                    <li><a href="/">Főoldal</a></li>
-                    <li><a href="exercise">SOAP kliens</a></li>
-                    <li><a href="forex-account.html">Forex kliens</a></li>
-                </ul>
-            </nav>
-
-            <!-- Footer -->
-            <footer id="footer">
-                <p class="copyright"><a>Készítette: <br> Laucsik Dominik (DILLSZ) <br> Sztroka Alexandra Laura (G34R4F)</a>.</p>
-            </footer>
-        </div>
-    </div>
+    <!-- Közös Editorial navigáció -->
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
 </div>
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+<script th:src="@{/js/navbar.js}"></script>
 </body>
 </html>
