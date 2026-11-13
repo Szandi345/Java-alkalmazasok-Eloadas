@@ -128,4 +128,25 @@ public class OandaService {
                 .retrieve()
                 .body(String.class);
     }
+    public String closeTrade(String tradeId) {
+
+        // Trade ID ellenőrzése
+        if (tradeId == null ||
+                !tradeId.matches("[1-9][0-9]*")) {
+            throw new IllegalArgumentException(
+                    "A Trade ID csak pozitív egész szám lehet!");
+        }
+
+        // OANDA: teljes fennmaradó trade lezárása
+        java.util.Map<String, String> request =
+                java.util.Map.of("units", "ALL");
+        return restClient.put()
+                .uri("/v3/accounts/{id}/trades/{tradeId}/close",
+                        accountId, tradeId)
+                .contentType(
+                        org.springframework.http.MediaType.APPLICATION_JSON)
+                .body(request)
+                .retrieve()
+                .body(String.class);
+    }
 }

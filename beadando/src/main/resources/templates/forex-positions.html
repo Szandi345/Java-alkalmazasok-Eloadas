@@ -98,6 +98,8 @@
                     <th>Nyitási ár</th>
                     <th>Nyitás időpontja</th>
                     <th>Nem realizált P/L</th>
+                    <th>Művelet</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -118,6 +120,7 @@
                     <td th:text="${position.price}"></td>
                     <td th:text="${position.openTime}"></td>
                     <td th:text="${position.unrealizedPL}"></td>
+                    <td><a th:href="@{/forex/close(tradeId=${position.id})}" class="btn btn-sm btn-outline-danger">Zárás</a></td>
                 </tr>
                 </tbody>
             </table>

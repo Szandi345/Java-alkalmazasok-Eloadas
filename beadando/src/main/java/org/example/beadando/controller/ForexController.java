@@ -307,4 +307,88 @@ public class ForexController {
         }
         return "forex-positions";
     }
+    @GetMapping("/forex/close")
+    public String closeTradePage(
+            @RequestParam(required = false) String tradeId,
+            Model model) {
+        model.addAttribute("tradeId",
+                tradeId == null ? "" : tradeId);
+        return "forex-close";
+    }
+    @PostMapping("/forex/close")
+    public String closeTrade(
+            @RequestParam String tradeId,
+            Model model) {
+        model.addAttribute("tradeId", tradeId);
+
+        // A Trade ID ellenőrzése
+        if (tradeId == null ||
+                !tradeId.matches("[1-9][0-9]*")) {
+            model.addAttribute("error",
+                    "Adj meg egy érvényes, pozitív Trade ID-t!");
+            return "forex-close";
+        }
+        try {
+            // Pozíció lezárása az OANDA API-val
+            String response = oandaService.closeTrade(tradeId);
+
+            // OANDA válasz feldolgozása
+            JsonNode root = objectMapper.readTree(response);
+            JsonNode fill =
+                    root.path("orderFillTransaction");
+            JsonNode cancel =
+                    root.path("orderCancelTransaction");
+            if (!fill.isMissingNode() && !fill.isNull()) {
+                JsonNode closedTrades =
+                        fill.path("tradesClosed");
+                boolean tradeClosed = false;
+                String realizedPL = "";
+                if (closedTrades.isArray()) {
+                    for (JsonNode closed : closedTrades) {
+                        if (tradeId.equals(
+                                closed.path("tradeID").asText())) {
+                            tradeClosed = true;
+                            realizedPL =
+                                    closed.path("realizedPL").asText();
+                            break;
+                        }
+                    }
+                }
+                if (tradeClosed) {
+                    model.addAttribute("success",
+                            "A pozíció sikeresen lezárult!");
+                    model.addAttribute("closedTradeId", tradeId);
+                    model.addAttribute("closePrice",
+                            fill.path("price").asText());
+                    model.addAttribute("realizedPL", realizedPL);
+                    model.addAttribute("transactionId",
+                            fill.path("id").asText());
+                    model.addAttribute("closeTime",
+                            fill.path("time").asText());
+                } else {
+                    model.addAttribute("warning",
+                            "A megbízás végrehajtási választ kapott, "
+                                    + "de a megadott Trade ID lezárását "
+                                    + "nem sikerült igazolni. "
+                                    + "Ellenőrizd a nyitott pozíciókat!");
+                }
+            } else if (!cancel.isMissingNode()
+                    && !cancel.isNull()) {
+                model.addAttribute("error",
+                        "Az OANDA megszakította a zárást: "
+                                + cancel.path("reason").asText());
+            } else {
+                model.addAttribute("warning",
+                        "Nem érkezett egyértelmű végrehajtási "
+                                + "visszaigazolás. Ellenőrizd a "
+                                + "nyitott pozíciók listáját!");
+            }
+        } catch (Exception e) {
+            model.addAttribute("error",
+                    "A lezárás eredménye nem igazolható. "
+                            + "Ellenőrizd a Forex-Poz oldalt, "
+                            + "mielőtt újra elküldöd a kérést.");
+        }
+        return "forex-close";
+    }
 }
