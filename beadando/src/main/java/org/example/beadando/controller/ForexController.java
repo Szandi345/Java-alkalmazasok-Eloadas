@@ -3,6 +3,7 @@ import org.example.beadando.service.OandaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -188,5 +189,72 @@ public class ForexController {
                             + e.getMessage());
         }
         return "forex-history";
+    }
+    @GetMapping("/forex/open")
+    public String openTradePage(Model model) {
+        model.addAttribute("selectedInstrument", "EUR_USD");
+        model.addAttribute("units", 10);
+        return "forex-open";
+    }
+    @PostMapping("/forex/open")
+    public String openTrade(
+            @RequestParam String instrument,
+            @RequestParam int units,
+            Model model) {
+        model.addAttribute("selectedInstrument", instrument);
+        model.addAttribute("units", units);
+        try {
+            // OANDA megbízás elküldése
+            String response =
+                    oandaService.openTrade(instrument, units);
+
+            // JSON válasz feldolgozása
+            JsonNode root = objectMapper.readTree(response);
+            JsonNode fill =
+                    root.path("orderFillTransaction");
+            JsonNode cancel =
+                    root.path("orderCancelTransaction");
+
+            // Ellenőrizzük, hogy valóban végrehajtották-e
+            if (!fill.isMissingNode() && !fill.isNull()) {
+                JsonNode opened = fill.path("tradeOpened");
+                model.addAttribute("success",
+                        "A piaci megbízást végrehajtották!");
+                model.addAttribute("instrument",
+                        instrument);
+                model.addAttribute("executedUnits",
+                        fill.path("units").asText());
+                model.addAttribute("executedPrice",
+                        fill.path("price").asText());
+                model.addAttribute("transactionId",
+                        fill.path("id").asText());
+                if (!opened.isMissingNode()
+                        && !opened.isNull()) {
+                    model.addAttribute("tradeId",
+                            opened.path("tradeID").asText());
+                } else {
+                    model.addAttribute("warning",
+                            "A megbízás teljesült, de nem "
+                                    + "érkezett tradeOpened adat. "
+                                    + "Ellenőrizd a nyitott trade-eket!");
+                }
+            } else if (!cancel.isMissingNode()
+                    && !cancel.isNull()) {
+                model.addAttribute("error",
+                        "A megbízást az OANDA megszakította: "
+                                + cancel.path("reason").asText());
+            } else {
+                model.addAttribute("error",
+                        "Nem igazolható új trade nyitása. "
+                                + "Ellenőrizd az OANDA válaszát!");
+            }
+        } catch (Exception e) {
+            model.addAttribute("error",
+                    "A megbízás nem igazolható: "
+                            + "ellenőrizd a számla állapotát "
+                            + "és a nyitott trade-eket, "
+                            + "mielőtt újra próbálkozol.");
+        }
+        return "forex-open";
     }
 }

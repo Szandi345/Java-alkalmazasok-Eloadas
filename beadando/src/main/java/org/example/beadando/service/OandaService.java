@@ -82,4 +82,42 @@ public class OandaService {
                 .retrieve()
                 .body(String.class);
     }
+    public String openTrade(String instrument, int units) {
+
+        // Csak a megadott instrumentumokat engedélyezzük
+        if (!java.util.Set.of(
+                "EUR_USD", "GBP_USD", "USD_JPY"
+        ).contains(instrument)) {
+            throw new IllegalArgumentException(
+                    "Érvénytelen instrumentum!");
+        }
+
+        // Mennyiség ellenőrzése
+        if (units == 0 || Math.abs((long) units) > 1000) {
+            throw new IllegalArgumentException(
+                    "A mennyiség -1000 és 1000 között lehet, "
+                            + "de nem lehet nulla!");
+        }
+
+        // OANDA MARKET megbízás
+        java.util.Map<String, Object> order =
+                java.util.Map.of(
+                        "order", java.util.Map.of(
+                                "type", "MARKET",
+                                "instrument", instrument,
+                                "units", String.valueOf(units),
+                                "timeInForce", "FOK",
+                                "positionFill", "OPEN_ONLY"
+                        )
+                );
+
+        // POST kérés az OANDA API felé
+        return restClient.post()
+                .uri("/v3/accounts/{id}/orders", accountId)
+                .contentType(
+                        org.springframework.http.MediaType.APPLICATION_JSON)
+                .body(order)
+                .retrieve()
+                .body(String.class);
+    }
 }
