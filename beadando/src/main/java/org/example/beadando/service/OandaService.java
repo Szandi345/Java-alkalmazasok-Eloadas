@@ -31,4 +31,25 @@ public class OandaService {
                 .retrieve()
                 .body(String.class);
     }
+
+    public String getCurrentPrice(String instrument) {
+
+        // Csak az engedélyezett devizapárok használhatók
+        if (!java.util.Set.of(
+                "EUR_USD", "GBP_USD", "USD_JPY"
+        ).contains(instrument)) {
+            throw new IllegalArgumentException(
+                    "Érvénytelen instrumentum!");
+        }
+
+        // Aktuális árfolyam lekérése az OANDA API-tól
+        return restClient.get()
+                .uri(uriBuilder -> uriBuilder
+                        .path("/v3/accounts/{id}/pricing")
+                        .queryParam("instruments", instrument)
+                        .build(accountId))
+                .retrieve()
+                .body(String.class);
+    }
+
 }

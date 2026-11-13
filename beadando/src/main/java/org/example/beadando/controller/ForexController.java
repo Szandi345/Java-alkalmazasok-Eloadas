@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ForexController {
@@ -60,4 +61,60 @@ public class ForexController {
         }
         return "forex-account";
     }
+
+    @GetMapping("/forex/price")
+    public String currentPrice(
+            @RequestParam(required = false,
+                    defaultValue = "EUR_USD")
+            String instrument,
+            Model model) {
+
+        model.addAttribute("selectedInstrument", instrument);
+        try {
+            // OANDA API meghívása
+            String response =
+                    oandaService.getCurrentPrice(instrument);
+
+            // JSON feldolgozása
+            JsonNode root = objectMapper.readTree(response);
+            JsonNode prices = root.path("prices");
+            if (!prices.isArray() || prices.isEmpty()) {
+                throw new IllegalStateException(
+                        "Nem érkezett árfolyamadat.");
+            }
+            JsonNode price = prices.get(0);
+
+            // Ellenőrizzük, hogy van-e vételi és eladási ár
+            if (!"tradeable".equals(
+                    price.path("status").asText())
+                    || price.path("bids").isEmpty()
+                    || price.path("asks").isEmpty()) {
+
+                throw new IllegalStateException(
+                        "Az instrumentum jelenleg nem kereskedhető.");
+            }
+
+            String bid = price.path("bids")
+                    .get(0).path("price").asText();
+
+            String ask = price.path("asks")
+                    .get(0).path("price").asText();
+
+            // Adatok átadása a HTML oldalnak
+            model.addAttribute("bid", bid);
+            model.addAttribute("ask", ask);
+            model.addAttribute("priceTime",
+                    price.path("time").asText());
+
+            model.addAttribute("status",
+                    price.path("status").asText());
+
+        } catch (Exception e) {
+            model.addAttribute("error",
+                    "Nem sikerült lekérni az árfolyamot. "
+                            + "Ellenőrizd az instrumentumot és az OANDA kapcsolatot!");
+        }
+        return "forex-price";
+    }
+
 }
