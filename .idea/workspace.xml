@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="18ad4b4c-7d2c-4541-99e5-849ca2071413" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/beadando/src/main/resources/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/beadando/src/main/resources/templates/result.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,23 +35,23 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0412346225694846" />
-      <entry key="MS500" value="1.5414133587953107" />
-      <entry key="S2" value="2.1896768247844105" />
-      <entry key="S5" value="2.5856444274822126" />
-      <entry key="S10" value="2.79796881196338" />
-      <entry key="S30" value="3.704905653140843" />
-      <entry key="S60" value="4.9883887078810485" />
-      <entry key="M2" value="6.553820396016095" />
-      <entry key="M5" value="9.14880979340888" />
-      <entry key="M10" value="14.225216789212777" />
-      <entry key="M15" value="21.41014333839609" />
-      <entry key="M30" value="43.43065854999068" />
-      <entry key="H1" value="70.47864007784545" />
-      <entry key="H2" value="92.60596715707793" />
-      <entry key="H4" value="106.91694373894065" />
-      <entry key="D1" value="120.93708437463015" />
-      <entry key="W1" value="123.5568234426445" />
+      <entry key="MS100" value="1.0000015385470566" />
+      <entry key="MS500" value="1.0687736630853835" />
+      <entry key="S2" value="1.512100900110258" />
+      <entry key="S5" value="1.7651423063122262" />
+      <entry key="S10" value="1.8747241315480982" />
+      <entry key="S30" value="1.9565185785348134" />
+      <entry key="S60" value="2.010049727926773" />
+      <entry key="M2" value="2.514729373889919" />
+      <entry key="M5" value="5.3305960964401535" />
+      <entry key="M10" value="10.586475407351548" />
+      <entry key="M15" value="17.292900362551592" />
+      <entry key="M30" value="38.70657491823608" />
+      <entry key="H1" value="66.79375435660107" />
+      <entry key="H2" value="90.79267158042549" />
+      <entry key="H4" value="106.6925264839125" />
+      <entry key="D1" value="122.51405326455077" />
+      <entry key="W1" value="125.49498862199485" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -74,23 +73,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.7023158386880185" />
-      <entry key="MS500" value="1.411720187946329" />
-      <entry key="S2" value="2.1421550297214202" />
-      <entry key="S5" value="2.5635180385866536" />
-      <entry key="S10" value="2.785556072769638" />
-      <entry key="S30" value="3.6944312153661394" />
-      <entry key="S60" value="4.977936439194815" />
-      <entry key="M2" value="6.545297836188653" />
-      <entry key="M5" value="9.143213850759341" />
-      <entry key="M10" value="14.220882012689996" />
-      <entry key="M15" value="21.40609098652523" />
-      <entry key="M30" value="43.426973390052126" />
-      <entry key="H1" value="70.47578807011593" />
-      <entry key="H2" value="92.60412568168694" />
-      <entry key="H4" value="106.91588792143901" />
-      <entry key="D1" value="120.93688626121941" />
-      <entry key="W1" value="123.556794548309" />
+      <entry key="MS100" value="0.7371356307683747" />
+      <entry key="MS500" value="1.0041985750006643" />
+      <entry key="S2" value="1.486602317150302" />
+      <entry key="S5" value="1.7528284966719117" />
+      <entry key="S10" value="1.868108990608706" />
+      <entry key="S30" value="1.9541992266599193" />
+      <entry key="S60" value="2.008807936237836" />
+      <entry key="M2" value="2.513454516626016" />
+      <entry key="M5" value="5.328318828568081" />
+      <entry key="M10" value="10.583739381447405" />
+      <entry key="M15" value="17.28992629771303" />
+      <entry key="M30" value="38.703420598204346" />
+      <entry key="H1" value="66.79111255256593" />
+      <entry key="H2" value="90.79089601418231" />
+      <entry key="H4" value="106.69148767421974" />
+      <entry key="D1" value="122.51385501779042" />
+      <entry key="W1" value="125.49495962407345" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -143,6 +142,10 @@
   </component>
   <component name="RunManager">
     <configuration name="BeadandoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <envs>
+        <env name="OANDA_ACCOUNT_ID" value="101-004-40990189-001" />
+        <env name="OANDA_API_TOKEN" value="4ee963b3c5050002ec6d20addb8b5144-ff19effa17a26ebffcd8db512f4689e4" />
+      </envs>
       <module name="beadando" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.example.beadando.BeadandoApplication" />
       <method v="2">
